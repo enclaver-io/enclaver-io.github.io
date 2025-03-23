@@ -1,0 +1,25 @@
+<style>
+.highlight-white { color: #fff; }
+.highlight-string { color: #6096FF; } /* orange F19F00 */
+.highlight-output { color: #4567B3; } /* blue 4567B3 */
+.highlight-muted { color: #193d7c; }
+.highlight-padding { padding-top: 4px; }
+.highlight-controls {
+    font-size: 11px;
+    padding-bottom: 10px;
+    color: #4567B3;
+}
+</style>
+<div class="hero-highlight highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#0E2347;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><div class="highlight-controls">&#11044; &#11044; &#11044;</div><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span class="highlight-white">$</span><span class="highlight-white"> enclaver build <span class="highlight-muted">\</span></span>
+</span></span><span style="display:flex;"><span>  -<span class="highlight-output"><span class="highlight-white">f</span> <span class="highlight-string">enclaver.yaml</span></span>
+<!-- </span></span><span style="display:flex;"><span>  --<span class="highlight-white">images-source</span><span class="highlight-string"> example/app:v1</span>
+ --></span></span><span style="display:flex;"><span class="highlight-padding"><span class="highlight-output">Tagged example/enclave:v1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span class="highlight-white">$</span><span class="highlight-white"> enclaver run </span><span class="highlight-string">example/enclave:v1</span>
+</span></span><span style="display:flex;"><span class="highlight-padding"><span class="highlight-output">Starting egress proxy on vsock port 17002</span>
+<span class="highlight-output">Started enclave i-00e43bfc030dd8469-enc1840fa584262e1a</span>
+<span class="highlight-output">Connected to enclave, starting log stream</span>
+<span class="highlight-output"><span class="highlight-output">Starting "python -m flask run --host=0.0.0.0 --port=8001"</span>
+<span class="highlight-output">* Serving Flask app "/opt/app/server.py"</span></span></code></pre></div>
+
+

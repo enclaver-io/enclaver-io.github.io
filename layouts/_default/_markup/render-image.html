@@ -1,0 +1,2 @@
+<!-- Construct a path from the base URL, the relative directory, and the relative file -->
+<img src="{{$.Page.Site.BaseURL}}{{path.Join .Page.File.Dir}}/{{ .Destination | safeURL }}" alt="{{ $.Text }}" />

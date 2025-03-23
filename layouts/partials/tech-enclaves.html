@@ -1,0 +1,28 @@
+<script src="{{.Site.BaseURL}}js/tabbar.js"></script>
+
+<div class="tabbar">
+    <div class="tabbar-tabs">
+        <a class="tabbar-tab" data-tab="tech-security">Security & Isolation</a>
+        <a class="tabbar-tab" data-tab="tech-privacy">Privacy</a>
+        <a class="tabbar-tab" data-tab="tech-attestation">Attestation & Code Identity</a>
+    </div>
+
+    <div class="tabbar-contents">
+        <div class="tabbar-content" id="tech-security">
+            <p>An enclave guarantees that sensitive data can never leave the enclave unless specifically allowed. Data inserted, processed or decrypted can never be read by an attacker.</p>
+            <p>This protection starts in the hardware with isolated RAM, dedicated CPU cores, reduced default networking and Trusted Platform Modules (TPM), all powered by AWS Nitro Enclaves.</p>
+            <p>Enclaver adds additional network policy that is embedded into the enclave image by the author, so it can't be relaxed or removed.</p>
+        </div>
+        <div class="tabbar-content" id="tech-privacy">
+            <p>An enclave fulfills the exact definition of privacy: being free from observation or disruption by others. Even a hostile parent machine can't introspect the enclave or modify its operating parameters.</p>
+            <p>Enclaves are the perfect environment to decrypt and process sensitive data of any sort. This can be long-lived like a complete microservice or short per-request workflows.</p>
+            <p>Encryption key access policies can be tied to the enclave's attestation which guarantees that only trusted code can fetch the key.</p>
+        </div>
+        <div class="tabbar-content" id="tech-attestation">
+            <p>An attestation is a reproducable "measurement" of a piece of code that can be used to give the code a unique identity. An attestation can be generated at build time and trusted at runtime by infrastructure teams.</p>
+            <p>Tying credentials or access policies (for encryption keys) to an attestation is extremely powerful because the attestation can't be spoofed or stolen like human credentials or hardcoded secrets.</p>
+            <p><a href="{{.Site.BaseURL}}enclaver/docs/0.x/architecture/#calculating-cryptographic-attestations">Read more about Enclaver attestations</a>.</p>
+        </div>
+    </div>
+
+</div>

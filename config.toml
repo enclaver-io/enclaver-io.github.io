@@ -1,0 +1,38 @@
+title = "Enclaver is an open source toolkit created to enable easy adoption of software enclaves."
+author = "Enclaver Team"
+copyright = "Copyright © 2025 The Enclaver Team; all rights reserved."
+languageCode = "en"
+DefaultContentLanguage = "en"
+enableInlineShortcodes = true
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors = ["error-remote-getjson"]
+
+disableKinds = ["taxonomy", "term"]
+
+[taxonomies]
+product = 'products'
+category = 'categories'
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[deployment]
+# By default, files are uploaded in an arbitrary order.
+# Files that match the regular expressions in the "Order" list
+# will be uploaded first, in the listed order.
+order = [".jpg$", ".gif$"]
+
+
+[[deployment.targets]]
+name = "staging"
+URL = "gs://stage.enclaver.io?prefix={{SHORT_SHA}}/"
+
+[[deployment.targets]]
+name = "production"
+URL = "gs://enclaver.io"
+
+
+[outputs]
+home = ["html"]
+section = ["html"]

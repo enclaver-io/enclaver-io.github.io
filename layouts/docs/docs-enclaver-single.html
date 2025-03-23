@@ -1,0 +1,20 @@
+{{ partial "header.html" . }}
+{{ partial "nav.html" . }}
+
+<script src="{{.Site.BaseURL}}js/commands.js"></script>
+<div class="docs">
+    <div class="docs-sidebar">
+        {{ partial "doc-nav-enclaver.html" . }}
+    </div>
+    <div class="docs-content">
+        {{ .Content }}
+    </div>
+    <div class="docs-toc hidden-xs hidden-sm hidden-md">
+        <div class="docs-toc-fixed">
+            <div class="doc-toc-title">On This Page</div>
+            {{ .TableOfContents }}
+        </div>
+    </div>
+</div>
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,26 @@
+{{ partial "header.html" . }}
+{{ partial "nav.html" . }}
+
+<script src="{{.Site.BaseURL}}js/commands.js"></script>
+<div class="blog-post">
+	<div class="blog-post-header">
+		<div class="wrapper">
+
+			<a href="{{.Site.BaseURL}}blog/" class="blog-post-back">&#8592; Back to Blog</a>
+
+		 	<h1 class="blog-post-title">{{ .Title }}</h1>
+		 	<div class="blog-post-author header-skew small">{{ .Params.author }}, {{ .Params.author_title }}</div>
+		 	<div class="blog-post-date">
+				<time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "January 2, 2006" }}</time>
+			</div>
+
+		</div>
+	</div>
+	<div class="wrapper">
+		<div class="blog-post-content">
+			{{ .Content }}
+		</div>
+	</div>
+</div>
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,51 @@
+<div class="docs-sidebar-logo">
+    <a href="{{.Site.BaseURL}}/docs/0.x">
+        <img src="{{.Site.BaseURL}}logos/enclaver-logo-color.svg" />
+        <div class="docs-sidebar-name">v0.x</div>
+    </a>
+</div>
+
+<div class="docs-sidebar-section">
+    <div class="docs-sidebar-section-title">Getting Started</div>
+    <ul>
+        {{ range (where (where .Site.Pages "Section" "docs") ".Params.category" "getting_started") }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</div>
+
+<div class="docs-sidebar-section">
+    <div class="docs-sidebar-section-title">End to End Guides</div>
+    <ul>
+        {{ range (where (where .Site.Pages "Section" "docs") ".Params.category" "guides") }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</div>
+
+<div class="docs-sidebar-section">
+    <div class="docs-sidebar-section-title">Reference</div>
+    <ul>
+        {{ range (where (where .Site.Pages "Section" "docs") ".Params.category" "reference") }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</div>
+
+<div class="docs-sidebar-section">
+    <div class="docs-sidebar-section-title">Deploying</div>
+    <ul>
+        {{ range (where (where .Site.Pages "Section" "docs") ".Params.category" "deploying") }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</div>
+
+<div class="docs-sidebar-section">
+    <div class="docs-sidebar-section-title">Troubleshooting</div>
+    <ul>
+        {{ range (where (where .Site.Pages "Section" "docs") ".Params.category" "troubleshoot") }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</div>

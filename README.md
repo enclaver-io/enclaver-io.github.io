@@ -2,8 +2,6 @@
 
 Our website, powered by the Hugo static site generator.
 
-## Syncing Documentation
-
 ## Running Locally
 
 ```

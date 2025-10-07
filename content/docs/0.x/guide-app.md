@@ -164,12 +164,7 @@ After the image is fetched, it is broken apart into [the outside][outside] and [
 We will start it manually using Docker, but you can also set up a [systemd unit][unit].
 
 ```console
-$ docker run \
-    --rm \
-    --detach \
-    --privileged \
-    --name enclave \
-    --device=/dev/nitro_enclaves:/dev/nitro_enclaves:rw \
+$ enclaver run \
     -p 8001:8001 \
     registry.edgebit.io/no-fly-list:enclave-latest
 ```

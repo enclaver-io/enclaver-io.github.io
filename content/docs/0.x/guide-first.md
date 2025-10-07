@@ -57,16 +57,16 @@ Enclaver uses a source "app" container image and transforms that image into an e
 
 ```console
 $ cd enclaver/example
-$ sudo docker build --tag app .
+$ docker build --tag app .
 ```
 
 This app echos a string back to you with each HTTP request:
 
 ```console
-$ sudo docker run --rm --detach --name app --publish 8000:8000 app
+$ docker run --rm --detach --name app --publish 8000:8000 app
 $ curl localhost:8000
 Hello World!
-$ sudo docker stop app
+$ docker stop app
 ```
 
 ## Build the Enclave Image
@@ -90,15 +90,81 @@ ingress:
 Build our enclave image:
 
 ```console
-$ sudo enclaver build --file enclaver.yaml
+$ enclaver build
 ```
+
+## Verify the Enclave Image (optional)
+
+If you [verified](../install#verifying-the-binary) the downloaded `enclaver` binary against its SLSA attestation during the install step, you can trust the authenticity of the `enclaver` binary.
+However during the build step, the Enclaver downloaded several helper Docker images that it combined with the app to produce the final image.
+Before trusting and using the enclave image, you can verify that the downloaded helpers were also authentic.
+`enclaver build` will print to the standard output a JSON with "Sources" that went into the image.
+Use the digests to verify their provenance back to `enclaver-io/enclaver` repo:
+
+```console
+$ enclaver build
+{
+  "Sources": {
+    "App": {
+      "ID": "sha256:269bf2a9aca23ddc0fe66558e0b23ff5be6129838e365b0ef05bbe8e67f72191"
+    },
+    "Odyn": {
+      "ID": "sha256:2be2016f0aa17f7cfc2660c635822b094a0c2ee64516e69be9913e48394c75f0",
+      "Name": "public.ecr.aws/s2t1d4c6/enclaver-io/odyn:sha-3666d96",
+      "RepoDigest": "public.ecr.aws/s2t1d4c6/enclaver-io/odyn@sha256:f4f3c2bc6489494579adc03ddbe7dfa5e9c84bc6ed848d1bd196969533a74d38"
+    },
+    "NitroCLI": {
+      "ID": "sha256:14dd347aec286f67025c824762876b0226d0a890033bcd4ac5076c06fe90eee8",
+      "Name": "public.ecr.aws/s2t1d4c6/enclaver-io/nitro-cli:latest",
+      "RepoDigest": "public.ecr.aws/s2t1d4c6/enclaver-io/nitro-cli@sha256:83d1bf977d62d68fe49763c94fb0d1ab23dc59a5844e9f5b86a07ccf7618ced9"
+    },
+    "Sleeve": {
+      "ID": "sha256:90a3e02986a728902d0751180e5213edc63cc0348f62cf03cd1ff7578281cd7d",
+      "Name": "public.ecr.aws/s2t1d4c6/enclaver-io/enclaver-wrapper-base:sha-3666d96",
+      "RepoDigest": "public.ecr.aws/s2t1d4c6/enclaver-io/enclaver-wrapper-base@sha256:00be50a88900a57294b82d62419b3ec3ef1dae2b7adf15565c04d2604fcb484a"
+    }
+  },
+  "Measurements": {
+    "PCR0": "3deca96aa8ab2d9ba6452c3075eb33cabb6b87543fbbf7f6746764c4d9c1e92ad8f3e441e7de9d1515978491044dd996",
+    "PCR1": "4b4d5b3661b3efc12920900c80e126e4ce783c522de6c02a2a5bf7af3a2b9327b86776f188e4be1c1c404a129dbda493",
+    "PCR2": "73778961b3d4faa24ba0f0a772256a3ab6498cc22b8b298bf4751c450e297d18d1dde18cf1c6ff6deaab16da4bdc9ff9"
+  },
+  "Image": {
+    "ID": "sha256:085cf99c1ce2677bda33d8cc1446638ce8b0802d84b772fe43a5f304ae2901fe",
+    "Name": "enclave:latest"
+  }
+}
+
+$ gh attestation verify --repo enclaver-io/enclaver oci://public.ecr.aws/s2t1d4c6/enclaver-io/odyn@sha256:f4f3c2bc6489494579adc03ddbe7dfa5e9c84bc6ed848d1bd196969533a74d38
+Loaded digest sha256:f4f3c2bc6489494579adc03ddbe7dfa5e9c84bc6ed848d1bd196969533a74d38 for oci://public.ecr.aws/s2t1d4c6/enclaver-io/odyn@sha256:f4f3c2bc6489494579adc03ddbe7dfa5e9c84bc6ed848d1bd196969533a74d38
+Loaded 1 attestation from GitHub API
+
+The following policy criteria will be enforced:
+- Predicate type must match:................ https://slsa.dev/provenance/v1
+- Source Repository Owner URI must match:... https://github.com/enclaver-io
+- Source Repository URI must match:......... https://github.com/enclaver-io/enclaver
+- Subject Alternative Name must match regex: (?i)^https://github.com/enclaver-io/enclaver/
+- OIDC Issuer must match:................... https://token.actions.githubusercontent.com
+
+✓ Verification succeeded!
+
+The following 1 attestation matched the policy criteria
+
+- Attestation #1
+  - Build repo:..... enclaver-io/enclaver
+  - Build workflow:. .github/workflows/release.yaml@refs/heads/main
+  - Signer repo:.... enclaver-io/enclaver
+  - Signer workflow: .github/workflows/release.yaml@refs/heads/main
+```
+
+Repeat the above for the "Sleeve" source and the NitroCLI (NitroCLI comes from enclaver-io/nitro-cli-docker repo).
 
 ## Run the Enclave
 
 Run your enclave image by referencing it by it's given `target` name:
 
 ```console
-$ sudo enclaver run --publish 8000:8000 enclave:latest
+$ enclaver run --publish 8000:8000 enclave:latest
 ```
 
 Open a new shell and send a request to the service:

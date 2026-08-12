@@ -178,7 +178,7 @@ These components have minimal overhead compared to the CPU and RAM carved out fo
 ```systemd
 [Unit]
 Description=Enclaver
-Documentation=https://enclaver.io/docs/
+Documentation=https://enclaver-io.github.com/docs/
 After=docker.service
 Requires=docker.service
 Requires=nitro-enclaves-allocator.service

@@ -38,10 +38,10 @@ spec:
         topologyKey: kubernetes.io/hostname
         whenUnsatisfiable: DoNotSchedule
       nodeSelector:
-        enclaver.io/enclave: nitro
+        enclaver-io.github.com/enclave: nitro
       containers:
       - name: enclave
-        image: registry.edgebit.io/no-fly-list:enclave-latest
+        image: YOUR-IMAGE
         ports:
            - containerPort: 8001
              name: enclave-app
@@ -93,10 +93,10 @@ Due to Amazon restrictions, each EC2 machine can only run a single enclave at a 
 
 ### Labeling Nodes
 
-The CloudFormation will label your Nodes with `enclaver.io/enclave=nitro` so that your Deployment can target the qualified Nodes.
+The CloudFormation will label your Nodes with `enclaver-io.github.com/enclave=nitro` so that your Deployment can target the qualified Nodes.
 
 ```console
-$ kubectl get nodes --selector=enclaver.io/enclave=nitro
+$ kubectl get nodes --selector=enclaver-io.github.com/enclave=nitro
 NAME                            STATUS   ROLES    AGE     VERSION
 ip-172-31-37-102.ec2.internal   Ready    <none>   5m      v1.23.9-eks-ba74326
 ip-172-31-38-217.ec2.internal   Ready    <none>   4m44s   v1.23.9-eks-ba74326
@@ -124,7 +124,7 @@ Then send a request to the forward port, which will be answered from within the 
 
 ```console
 $ curl localhost:8001
-"https://enclaver.io/docs/0.x/guide-app/"
+"https://enclaver-io.github.com/docs/0.x/guide-app/"
 ```
 
 Jump over to the [simple Python app][app] guide (the URL printed above) that explains our sample application in more detail.

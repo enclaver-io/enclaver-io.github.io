@@ -23,16 +23,6 @@ unsafe = true
 # will be uploaded first, in the listed order.
 order = [".jpg$", ".gif$"]
 
-
-[[deployment.targets]]
-name = "staging"
-URL = "gs://stage.enclaver.io?prefix={{SHORT_SHA}}/"
-
-[[deployment.targets]]
-name = "production"
-URL = "gs://enclaver.io"
-
-
 [outputs]
 home = ["html"]
 section = ["html"]

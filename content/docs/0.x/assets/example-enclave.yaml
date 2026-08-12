@@ -18,7 +18,7 @@ spec:
         topologyKey: kubernetes.io/hostname
         whenUnsatisfiable: DoNotSchedule
       nodeSelector:
-        enclaver.io/enclave: nitro
+        enclaver-io.github.com/enclave: nitro
       containers:
       - name: enclave
         image: registry.edgebit.io/no-fly-list:enclave-latest

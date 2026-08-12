@@ -59,7 +59,7 @@ On the EC2 machine, add this systemd unit to `/etc/systemd/system/enclave.servic
 ```systemd
 [Unit]
 Description=Enclaver
-Documentation=https://enclaver.io/enclaver/docs/
+Documentation=https://enclaver-io.github.com/enclaver/docs/
 After=docker.service
 Requires=docker.service
 Requires=nitro-enclaves-allocator.service
@@ -94,7 +94,7 @@ The example app answers web requests on port 8001 of the EC2 machine:
 
 ```console
 $ curl localhost:8001
-"https://enclaver.io/enclaver/docs/0.x/guide-app/"
+"https://enclaver-io.github.com/enclaver/docs/0.x/guide-app/"
 ```
 
 Jump over to the [simple Python app][app] guide (the output URL above) that explains our sample application in more detail and how to build the image that was run above.
